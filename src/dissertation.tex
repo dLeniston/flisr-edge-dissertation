@@ -1,0 +1,84 @@
+\documentclass{article}
+
+%%%%%%% PACKAGES %%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2cm]{geometry}
+\usepackage{import}
+\usepackage{blindtext}
+\usepackage{setspace}
+\usepackage[usenames,dvipsnames,table]{xcolor}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{stackengine}[2013-10-15]
+\newcommand\textss[1]{\stackengine{.9ex}{}{\scriptsize#1}{O}{l}{F}{F}{L}}
+\graphicspath{ {./images/} }
+\usepackage{notoccite}
+\usepackage{lscape}
+\usepackage{caption}
+\usepackage{hyperref}
+
+\usepackage{acro}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    filecolor=magenta,
+    urlcolor=cyan
+    }
+
+\urlstyle{same}
+\onehalfspace
+
+\title{\huge{\textbf{Dissertation}} \\
+\LARGE{FLISR Edge \& Network Simulation Test Platform}}
+\author{Darren Leniston \\
+        Supervisor - Dr Kieran Murphy
+}
+\date{December 2022}
+
+% Allow rowstyles to be set
+\newcolumntype{$}{>{\global\let\currentrowstyle\relax}}
+\newcolumntype{^}{>{\currentrowstyle}}
+\newcommand{\rowstyle}[1]{\gdef\currentrowstyle{#1}%
+  #1\ignorespaces
+}
+% Table style
+\newcommand{\header}{\rowcolor{tableHeading}\rowstyle{\bfseries}}
+\newcommand{\row}{\rowstyle{\normalsize{}}}
+\newenvironment{tabledata}[1][1]{%
+  \renewcommand*{\extrarowheight}{0.1cm}%
+  \tabular%
+}{%
+  \endtabular
+}
+\rowcolors{2}{tableShading}{white}
+%Default table position
+\makeatletter
+\def\fps@table{htbp}
+\makeatother
+\definecolor{tableHeading}{HTML}{c2c9d4}
+\definecolor{tableShading}{HTML}{e8eaef}
+\begin{document}
+\pagenumbering{roman}
+\clearpage\maketitle
+\thispagestyle{empty}
+\begin{center}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=8cm]{SETU}
+        \label{fig:logo}
+    \end{figure}
+    \large{MSc in Computing (Enterprise Software Systems) \\
+    School Of Science and Computing}
+\end{center}
+
+\clearpage
+\bibliographystyle{plain}
+\bibliography{references/references}
+\end{document}
+%\end{document}
+%\newpage
+%\setstretch{1}  %reduce bibliography line spacing
+%\printbibliography
+%\end{document}
