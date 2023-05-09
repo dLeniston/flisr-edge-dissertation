@@ -1,4 +1,28 @@
 \subsection{Motivations for the research}
 \label{sec:motivation}
 
+In tandem with the rapid transformation of the energy sector, the need for a resilient grid is vital with the growing reliance on consistent power delivery for societal, business and manufacturing activities.
+Coupled with this is the rising concern of climate change and its impact on everyday life. Recent times have seen an increase in the number and severity of weather events which cause localised and wide-scale damage to
+infrastructure. Such events often lead to loss of energy supply to consumers, businesses and other institutions through damage caused to wires, transformers, substations, equipment and other grid assets
+\cite{7091066}. In relation to the Irish energy network, weather events such as ex-hurricane Ophelia in 2017 resulted in 5,500 damaged overhead lines and 385,000 homes \& businesses without power \cite{dso-annual-performance-report_2017}.
+\\
+\\
+In addition, the Distribution System Operator (DSO) in Ireland, ESB Networks, is faced with fines by the regulator based on specific \acs{kpi}s which are directly influenced by the amount of unplanned service interruptions and loss of supply, namely
+\ac{ci} \& Customer Minutes Lost (CML). For reference, Ophelia resulted in a total of 665.6 million CML, culminating in a 4.86 million euro fine imposed by the Irish energy regulator \cite{dso-annual-performance-report_2017}.
+However, it must be said that although Ophelia was a rare event, 2017 was not an outlier in terms of total CML per customer, as detailed in ESB Networks 2020 report \cite{networks_2021} and illustrated in
+\hyperref[fig:cml]{Figure \ref{fig:cml}}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.3\textwidth]{fig1_cml}
+  \caption{\label{fig:cml}CML figures 2016-2020}
+\end{figure}
+
+
+In this way then, techniques such as FLISR offer the possibility to drastically mitigate against the effects of inclement weather events. However, there are limitations to the DSO in regards to deploying a FLISR solution to the grid, such
+as the cost of specialized equipment, installation and requirement for large-scale software platforms such as ADMS. In combination with this, weather events can also effect communication networks, thereby reducing or even negating the
+benefit of a cloud-based or centralised FLISR implementation. With this factor in mind, the concept of edge computing is one that may greatly benefit the operation of a FLISR algorithm in the field, by moving a subset of the
+business logic and data processing away from a centralised system, to the edge of the network. In the context of FLISR, this would enable sections of the network to operate independently if needed to isolate and restore fault events, providing
+a fault-tolerant FLISR solution able to operate effectively in conditions such as Ophelia.
+
 % subsection motivation (end)
