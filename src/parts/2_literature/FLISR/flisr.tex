@@ -28,12 +28,12 @@ the utility to consider the additional steps required to successfully deploy and
 effectively due to its autonomous nature, though one utility, Georgia Power, found that developing a simulator to test and validate FLISR eliminated the need for extensive field trials and served as a training tool for operation staff.
 \\
 \\
-A paper by \textit{Eriksson et al.} \cite{7000578} further discuss the limitations and considerations when implementing FLISR solutions, specifically centralised deployments, such as having a single point of failure and the requirement for the handling of large amounts of real-time data, large network topologies and the processing necessary to ensure consistent operation. They propose a
+A paper by \textit{Eriksson et al.}\ \cite{7000578} further discuss the limitations and considerations when implementing FLISR solutions, specifically centralised deployments, such as having a single point of failure and the requirement for the handling of large amounts of real-time data, large network topologies and the processing necessary to ensure consistent operation. They propose a
 distributed FLISR utilising a \ac{mas} devices, tested against a radial network commonly found in remote areas, and applying Prim's Algorithm to devise the FLISR logic. The solution proposed was tested against a
 cyber-physical testbed, with the results finding that the \acs{mas} approach to FLISR provided efficient grid stabalisation and fault restoration.
 \\
 \\
-Most relevant is a report produced by ESB Networks as an output of the H2020 project SOGNO \cite{sogno_report}. This project focused on delivering turn-key grid services for power quality monitoring, estimating network state,
+Most relevant is a report produced by ESB Networks as an output of the H2020 project SOGNO \cite{sogno_report}.\ This project focused on delivering turn-key grid services for power quality monitoring, estimating network state,
 load prediction and forecasting as well as FLISR. The FLISR implementation described in the report leveraged communication from Load Break Fault Make (LBFM) on-pole circuit breakers in the field. In the event of a fault,
 these switches communicate a Fault Passage Indicator (FPI) and Loss of Voltage Indicator and in this way it is possible to identify a fault occurrence. ESB Networks notes that a number of their networks currently rely upon
 manual intervention on the part of control room operation staff to manually identify and resolve fault events when they occur. This need for human intervention greatly increases the time taken to restore supply to consumers, leading

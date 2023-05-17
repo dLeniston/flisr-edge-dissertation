@@ -16,6 +16,14 @@
 \usepackage{lscape}
 \usepackage{caption}
 \usepackage{hyperref}
+\usepackage{lipsum}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
 
 \usepackage{acro}
 
