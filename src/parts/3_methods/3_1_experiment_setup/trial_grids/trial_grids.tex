@@ -17,6 +17,7 @@ describes the architecture implemented for the simulation platform with a descri
   \item \textbf{Databases}
 \end{itemize}
 
+\noindent
 Two database services are in place which serve varying needs of the simulation platform, the first hosts the grid topologies with a ``Neo4j'' instance for both visualisation and simulation
 purposes. The second database is intended to host the simulation results in a relational SQL format, which can then be served to the user via browser or exported to CSV for analysis.
 
@@ -24,6 +25,7 @@ purposes. The second database is intended to host the simulation results in a re
   \item \textbf{Grid topology service}
 \end{itemize}
 
+\noindent
 The grid topology service consists of a Python Flask server which provides an interface to request information relating to the grid topology, such as specific assets, asset data etc.,
 In addition, this service generates ``GeoJSON'' from the grid topology data which is used to visualise the trial site distribution grids.
 
@@ -31,6 +33,7 @@ In addition, this service generates ``GeoJSON'' from the grid topology data whic
   \item \textbf{Simulation service}
 \end{itemize}
 
+\noindent
 The simulation service serves as the largest and most complex, which also consists of a Python Flask server. Unlike the grid topology service, the simulation service queries for specific
 data and contains functionality in order to run fault simulations and provide and outward interface to pass data to visualise these simulations. This service also interacts directly with the
 FLISR Edge algorithms and simulates control on the edge devices. On completion of a simulation, the results are stored in the relational database.
@@ -39,6 +42,7 @@ FLISR Edge algorithms and simulates control on the edge devices. On completion o
   \item \textbf{Reporting service}
 \end{itemize}
 
+\noindent
 The reporting service again consists of a Python Flask server and REST interface. The key purpose of this service is to query, parse and process simulation result data stored in the Postgres database,
 for visualisation to the user and for analysis purposes by exporting to CSV format.
 
@@ -46,6 +50,7 @@ for visualisation to the user and for analysis purposes by exporting to CSV form
   \item \textbf{Visualisation service}
 \end{itemize}
 
+\noindent
 Finally, the visualisation service consists of a React front-end which serves a graphical user interface to the user where the distribution grids and simulations are visualised. The UI contains
 controls to set up and run simulations, view the simulation process, simulation results and the option to export these results for analysis. ``GeoJSON'' and ``LeaftletJS'' are leveraged to parse geolcation data,
 via ``OpenStreetMap''.
