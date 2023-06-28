@@ -1,14 +1,44 @@
-\subsubsection{FLISR Edge algorithm user stories}
+\subsubsection{FLISR Edge user stories}
 \label{sec:appendix_b}
 
-\begin{figure}[h]
+\begin{table}
+\hrule height 0.1cm  \vspace{0.5cm}
+  \caption{\label{table:ap_3}FLISR Master user stories}
   \centering
-  \includegraphics[width=0.8\textwidth]{fig_master}
-\end{figure}
+  \begin{adjustbox}{width=\textwidth}
+  \begin{tabular}{|l|l|l|l|p{5cm}}
+  \hline
+    \header User story number & As a "role" & I want to "goal/desire" & So that "benefit" \\ [0.1cm]
+    \row  FM-01 & As a FLISR Master & I want to have a central view of the distribution grid & \parbox{8cm}{I can see the structure of the distribution grid} \\ [0.5cm]
+    \row  FM-02 & As a FLISR Master & I to have a central FLISR algorithm & \parbox{8cm}{I can resolve faults from a central location} \\ [0.5cm]
+    \row  FM-03 & As a FLISR Master & I want a view of edge devices & \parbox{8cm}{I can monitor edge devices installed on the grid} \\ [0.5cm]
+    \row  FM-04 & As a FLISR Master & I want the ability to provision a network topology subset & \parbox{8cm}{FLISR nodes have a subset of the network related to them available} \\ [0.5cm]
+    \row  FM-05 & As a FLISR Master & I want to provision a distributed FLISR algorithm & \parbox{8cm}{FLISR nodes have a subset of the FLISR algorithm} \\ [0.5cm]
+    \row  FM-06 & As a FLISR Master & I want to recieve a heartbeat from FLISR nodes & \parbox{8cm}{I can monitor the connection of FLISR nodes on the grid} \\ [0.5cm]
+    \row  FM-07 & As a FLISR Master & I want to recieve the status of LBFM switches from FLISR nodes & \parbox{8cm}{I know when a fault event occurs} \\ [0.5cm]
+    \row  FM-08 & As a FLISR Master & I want to send commands to FLISR Nodes & \parbox{8cm}{I can action on fault restoration steps} \\ [0.5cm]
+  \hline
+  \end{tabular}
+  \end{adjustbox}
+\end{table}
 
-\begin{figure}[h]
+\begin{table}
+\hrule height 0.1cm  \vspace{0.5cm}
+  \caption{\label{table:ap_4}FLISR Node user stories}
   \centering
-  \includegraphics[width=0.8\textwidth]{fig_node}
-\end{figure}
+  \begin{adjustbox}{width=\textwidth}
+  \begin{tabular}{|l|l|l|l|p{5cm}}
+  \hline
+    \header User story number & As a "role" & I want to "goal/desire" & So that "benefit" \\ [0.1cm]
+    \row  FN-01 & As a FLISR Node & I want to have a subset of the network topology & \parbox{8cm}{I can see the structure of the line on which I am located} \\ [0.5cm]
+    \row  FN-02 & As a FLISR Node & I want to have a subset of the FLISR algorithm & \parbox{8cm}{I can resolve a fault event} \\ [0.5cm]
+    \row  FN-03 & As a FLISR Node & I want to monitor the status of a switch & \parbox{8cm}{I can detect FPI and/or LVI} \\ [0.5cm]
+    \row  FN-04 & As a FLISR Node & I want to sent a switches status to the FLISR Master & \parbox{8cm}{In the event of a fault the status of the switch is sent to the FLISR Master to process} \\ [0.5cm]
+    \row  FN-05 & As a FLISR Node & I want to send a heartbeat to the FLISR Master & \parbox{8cm}{I can determine if communication is available} \\ [0.5cm]
+    \row  FN-06 & As a FLISR Node & I want to act independently if communication with the FLISR Master is not available & \parbox{8cm}{I can use the subset of the FLISR algorithm to operate a switch if communication is not possible} \\ [0.5cm]
+  \hline
+  \end{tabular}
+  \end{adjustbox}
+\end{table}
 
 % subsection appendix_b (end)

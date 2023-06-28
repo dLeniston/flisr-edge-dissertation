@@ -1,14 +1,40 @@
 \subsubsection{FLISR Edge simulation platform user stories}
 \label{sec:appendix_a}
 
-\begin{figure}[h]
+\begin{table}
+\hrule height 0.1cm  \vspace{0.5cm}
+  \caption{\label{table:ap_1}CRO User Stories}
   \centering
-  \includegraphics[width=0.8\textwidth]{fig_cro}
-\end{figure}
+  \begin{adjustbox}{width=\textwidth}
+  \begin{tabular}{|l|l|l|l|p{5cm}}
+  \hline
+    \header User story number & As a "role" & I want to "goal/desire" & So that "benefit" \\ [0.1cm]
+    \row  CRO-01 & As a CRO & I want to view a distribution grid on a geographical map & \parbox{8cm}{I can see the structure of the distribution grid} \\ [0.5cm]
+    \row  CRO-02 & As a CRO & I want to view LBFM switches deployed on a distribution grid & \parbox{8cm}{I can see the number of on pole circuit breakers installed on a distribution grid} \\ [0.5cm]
+    \row  CRO-03 & As a CRO & I want to view LBFM metadata & \parbox{8cm}{I can read the specifications of selected switches} \\ [0.5cm]
+    \row  CRO-04 & As a CRO & I want to view distribution grid substations & \parbox{8cm}{I can see the location of substations feeding the distribution grid} \\ [0.5cm]
+    \row  CRO-05 & As a CRO & I want to visualise the flow of energy supply & \parbox{8cm}{I can see how the energy supply is proliferating throuout the network} \\ [0.5cm]
+    \row  CRO-06 & As a CRO & I want to simulate a fault on the grid & \parbox{8cm}{I can test the effects a specific fault event will have on the energy supply} \\ [0.5cm]
+    \row  CRO-07 & As a CRO & I want a simulated fault event to be resolved by a FLISR algorithm & \parbox{8cm}{I can see the effect the FLISR algorithm has in response to a simulated fault event} \\ [0.5cm]
+  \hline
+  \end{tabular}
+  \end{adjustbox}
+\end{table}
 
-\begin{figure}[h]
+\begin{table}
+\hrule height 0.1cm  \vspace{0.5cm}
+  \caption{\label{table:ap_2}DSO User Stories}
   \centering
-  \includegraphics[width=0.8\textwidth]{fig_dso}
-\end{figure}
+  \begin{adjustbox}{width=\textwidth}
+  \begin{tabular}{|l|l|l|l|p{5cm}}
+  \hline
+    \header User story number & As a "role" & I want to "goal/desire" & So that "benefit" \\ [0.1cm]
+    \row  DSO-01 & As a DSO & I want access to customer metrics & \parbox{8cm}{I have context for the amount of MV and LV customers on a given distribution grid} \\ [0.5cm]
+    \row  DSO-02 & As a DSO & I to view the CML of a simulated fault event & \parbox{8cm}{I can report on the effect a fault event would have on customers} \\ [0.5cm]
+    \row  DSO-03 & As a DSO & I to view an approximation of the cost of a simulated fault event & \parbox{8cm}{I can report on the potential financial penalty of a fault event} \\ [0.5cm]
+  \hline
+  \end{tabular}
+  \end{adjustbox}
+\end{table}
 
 % subsection appendix_a (end)
