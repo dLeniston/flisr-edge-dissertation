@@ -42,14 +42,25 @@ To define these actors, a list should be created with a basic format of:
 \end{itemize}
 
 \noindent
-It was necessary then to define users for both the simulation platform and the FLISR Edge algorithm itself, presented in \hyperref[fig:users]{Figure \ref{fig:users}}, and these served as the initial starting point to then define user stories
+It was necessary then to define users for both the simulation platform and the FLISR Edge algorithm itself, presented in \hyperref[table:1]{Table \ref{table:1}}, and these served as the initial starting point to then define user stories
 which guided the development tasks. The individual user stories for each actor can be found in Appendix \ref{sec:appendices}.
 
-\begin{figure}[h]
+\begin{table}
+\hrule height 0.1cm  \vspace{0.5cm}
+  \caption{\label{table:1}FLISR Edge Simulation Platform \& Algorithm Users}
   \centering
-  \includegraphics[width=0.8\textwidth]{fig_users}
-  \caption{\label{fig:users}System stakeholders}
-\end{figure}
+  \begin{adjustbox}{width=\textwidth}
+  \begin{tabular}{|l|l|l|l|p{5cm}}
+  \hline
+    \header Actor name & Actor type & Actor description & Actor Goal \\ [0.1cm]
+    \row  DSO (Distribution System Operator) & Organisation (Utility) & Network owner \& operator & \parbox{8cm}{They want a FLISR solution to reduce the level of CML caused by fault events on the distribution grid} \\ [0.5cm]
+    \row  CRO (Control Room Operator) &  Person (DSO personnel) & Asset operator & \parbox{8cm}{They want to simulate fault events to capture FLISR Edge outputs to evaluate their effectiveness in the field}  \\ [0.5cm]
+    \row  FLISR Master & System & FLISR centralised algorithm \& distributed system orcestrator & \parbox{8cm}{Overall FLISR Edge system management, provisioning distributed algorithms to network edge, centralised algorithm with full network view} \\ [0.5cm]
+    \row  FLISR Node & Subsystem & Distributed FLISR Edge device & \parbox{8cm}{Subsystem which runs at the network edge on an individual switch, it will act independently if a connection to the central system is unavailable} \\ [0.5cm]
+  \hline
+  \end{tabular}
+  \end{adjustbox}
+\end{table}
 
 
 \import{parts/3_methods/3_1_experiment_setup/trial_grids/}{trial_grids.tex}
