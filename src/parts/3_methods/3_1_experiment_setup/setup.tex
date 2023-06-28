@@ -1,7 +1,56 @@
 \subsection{Data \& Setup of Experiment Environment}
 \label{sec:setup}
 
-This section will describe the underlying data and work of setting up the experiment environment from the simulation and FLISR Edge perspective.
+The underlying data enabling the research activities is derived from a Geographical Information System (GIS) named Synergy, the data contained in this system maps the distribution
+network through the use of geospatial data \cite{4662926} in addition to metadata related to each individual asset, whether this entity is a pole, transformer, feeder, switch, substation
+or other asset type. The properties contained within this metadata depend on the asset type, for example which nodes (poles) are connected, their phases (RST) which denote
+whether they are part of the three phase (MV) or single phase (LV) network, which poles are equipped with Load Break Fault Make (LBFM) circuit breakers and which of these are denoted
+as ``Normally Open'' and therefore serve as the boundary between network lines.
+\\
+Before the data could be analysed, the export from Synergy which takes the form of a ``MDB'' (Microsoft Access Database) file was converted and ingested into a Postgres database, from here
+it was possible to generate an Entity Relationship Diagram (ERD), presented in \hyperref[fig:erd]{Figure \ref{fig:erd}}, to obtain a clearer view of the assets included in the data and their associated properties.
+From the analysis of the ERD it is clear that their is a deeply coupled relationship between entities in this data, and one of the goals of the research is to represent this data in a
+novel format through leveraging the concept of Graph Databases, which focus on the connections between data and affords a more ontological view \cite{8509057} of the relationship
+between entities. To achieve this aim, the Synergy data was ingested into a ``neo4j'' graph database in a containerised environment as illustrated in \hyperref[fig:neo4j]{Figure \ref{fig:neo4j}}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{fig_neo4j}
+  \caption{\label{fig:neo4j}Topology data ingested in graph database}
+\end{figure}
+\clearpage
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\textwidth]{fig_erd}
+  \caption{\label{fig:erd}Synergy data ERD}
+\end{figure}
+\clearpage
+
+\noindent
+As described in the proposal document, the research work applies an iterative, agile model, in particular employing the concept of Behavior Driven Development (BDD) which aims to
+identify and define system functionality from the lens of key stakeholders and defines functions and business logic as ``features'' which guide the development process \cite{9429593}.
+A system has one or more stakeholders, these are the actors outside of the system that interact with the application in question. Actors will have interests, goals or concerns in relation to that system, and may take the form of a person, outside system, subsystem or device to name a few. These actors will have various roles in regards to the operation of the system.
+
+To define these actors, a list should be created with a basic format of:
+
+\begin{itemize}
+  \item \textbf{Actor Name:} A clear identifier for the actor.
+  \item \textbf{Actor Type:} One of person, device, system etc.
+  \item \textbf{Actor Description:} Detailed description of the actor.
+  \item \textbf{Actor Goal:} What the actor aims to achieve with the system.
+\end{itemize}
+
+\noindent
+It was necessary then to define users for both the simulation platform and the FLISR Edge algorithm itself, presented in \hyperref[fig:users]{Figure \ref{fig:users}}, and these served as the initial starting point to then define user stories
+which guided the development tasks. The individual user stories for each actor can be found in Appendix \ref{sec:appendices}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{fig_users}
+  \caption{\label{fig:users}System stakeholders}
+\end{figure}
+
 
 \import{parts/3_methods/3_1_experiment_setup/trial_grids/}{trial_grids.tex}
 \import{parts/3_methods/3_1_experiment_setup/flisr_edge/}{flisr_edge.tex}

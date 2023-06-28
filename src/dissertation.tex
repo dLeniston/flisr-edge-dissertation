@@ -16,8 +16,127 @@
 \usepackage{lscape}
 \usepackage{caption}
 \usepackage{hyperref}
+\usepackage{lipsum}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
 
 \usepackage{acro}
+
+\DeclareAcronym{bdd}{
+  short = BDD,
+  long = Behaviour-Driven Development,
+  class = B
+}
+
+\DeclareAcronym{ci}{
+  short = CI,
+  long = Customer Interruption,
+  class = B
+}
+
+\DeclareAcronym{da}{
+  short = DA,
+  long = Distribution Automation,
+  class = B
+}
+
+\DeclareAcronym{flisr}{
+  short = FLISR,
+  long = {Fault Location, Isolation and Service Restoration},
+  class = B
+}
+
+\DeclareAcronym{ict}{
+  short = ICT,
+  long = Information and Communication Technology,
+  class = B
+}
+
+\DeclareAcronym{igsd}{
+  short = IGSD,
+  long = Intelligent Grid Switching Devices,
+  class = B
+}
+
+\DeclareAcronym{iot}{
+  short = IoT,
+  long = Internet of Things,
+  class = B
+}
+
+\DeclareAcronym{kpi}{
+  short = KPI,
+  long = Key Performance Indicator,
+  class = B
+}
+
+\DeclareAcronym{mas}{
+  short = MAS,
+  long = Multi Agent Approach,
+  class = B
+}
+
+\usepackage[acronym]{glossaries}
+\makenoidxglossaries
+\newglossaryentry{adms}
+{
+    name=Advanced Distribution Management System (ADMS),
+    description={A software platform containing a suite of functions to support distribution network management and optimisation}
+}
+
+\newglossaryentry{cml}
+{
+    name=Customer Minutes Lost (CML),
+    description={Measurement of the duration of interruption of supply over the course of a year. Consists of the average CML per consumer per year, in the event a supply interruption lasts up to or more than 3 minutes}
+}
+
+\newglossaryentry{dso}
+{
+    name=Distribution System Operator (DSO),
+    description={Designated entity responsible for management of the distribution network from source of generation to final consumer}
+}
+
+\newglossaryentry{fpi}
+{
+    name=Fault Passage Indicator (FPI),
+    description={Indicator notifying that an on-pole switch has detected a fault on its specific point of the network}
+}
+
+\newglossaryentry{gis}
+{
+    name=Geographical Information System (GIS),
+    description={Software system utilised to analyse and visualise data containing geographic information}
+}
+
+\newglossaryentry{lbfm}
+{
+    name=Load Break Fault Make Switch (LBFM),
+    description={On-pole circuit breaker which can be controlled to energise or de-energise a section of network in the event of over-load, fault event or required maintenance}
+}
+
+\newglossaryentry{lvi}
+{
+    name=Loss of Voltage Indicator (LVI),
+    description={Indicator notifying that an on-pole switch has lost supply on its specific point of the network}
+}
+
+
+\newglossaryentry{lv}
+{
+    name=Low Voltage (LV) Network,
+    description={Distribution network which transmits to end customers, generally at mains rated voltage (230V single phase \& 400V 3 phase for the Irish LV network)}
+}
+
+\newglossaryentry{mv}
+{
+    name=Medium Voltage (MV) Network,
+    description={Distribution network which transmits at voltages above 1kV (kilovolt) (10kV, 20kV \& 38kV for the Irish MV network)}
+}
 
 \hypersetup{
     colorlinks=true,
@@ -35,7 +154,7 @@
 \author{Darren Leniston \\
         Supervisor - Dr Kieran Murphy
 }
-\date{December 2022}
+\date{Interim Report - May 2023}
 
 % Allow rowstyles to be set
 \newcolumntype{$}{>{\global\let\currentrowstyle\relax}}
@@ -73,7 +192,20 @@
     School Of Science and Computing}
 \end{center}
 \newpage
+\import{parts/}{abstract.tex}
+\newpage
+\import{parts/}{declaration.tex}
+\newpage
+\setcounter{page}{1}
 \tableofcontents
+\listoffigures
+\listoftables
+
+\glsaddallunused
+\printnoidxglossaries
+\printacronyms[include-classes=B,name=List of Acronyms]
+\newpage
+\pagenumbering{arabic}
 \import{parts/1_introduction/}{introduction.tex}
 \import{parts/2_literature/}{literature.tex}
 \import{parts/3_methods/}{methods.tex}
@@ -83,6 +215,15 @@
 \clearpage
 \bibliographystyle{plain}
 \bibliography{references/references}
+\clearpage
+
+\appendix
+\section{Appendices}
+\label{sec:appendices}
+\input{parts/appendix/appendix_a.tex}
+\clearpage
+\input{parts/appendix/appendix_b.tex}
+% section appendices (end)
 \end{document}
 %\end{document}
 %\newpage
