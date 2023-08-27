@@ -1,34 +1,7 @@
 \subsection{Data \& Setup of Experiment Environment}
 \label{sec:setup}
 
-The underlying data enabling the research activities is derived from a Geographical Information System (GIS) named Synergy, the data contained in this system maps the distribution
-network through the use of geospatial data \cite{4662926} in addition to metadata related to each individual asset, whether this entity is a pole, transformer, feeder, switch, substation
-or other asset type. The properties contained within this metadata depend on the asset type, for example which nodes (poles) are connected, their phases (RST) which denote
-whether they are part of the three phase (MV) or single phase (LV) network, which poles are equipped with Load Break Fault Make (LBFM) circuit breakers and which of these are denoted
-as ``Normally Open'' and therefore serve as the boundary between network lines.
-\\
-Before the data could be analysed, the export from Synergy which takes the form of a ``MDB'' (Microsoft Access Database) file was converted and ingested into a Postgres database, from here
-it was possible to generate an Entity Relationship Diagram (ERD), presented in \hyperref[fig:erd]{Figure \ref{fig:erd}}, to obtain a clearer view of the assets included in the data and their associated properties.
-From the analysis of the ERD it is clear that their is a deeply coupled relationship between entities in this data, and one of the goals of the research is to represent this data in a
-novel format through leveraging the concept of Graph Databases, which focus on the connections between data and affords a more ontological view \cite{8509057} of the relationship
-between entities. To achieve this aim, the Synergy data was ingested into a ``neo4j'' graph database in a containerised environment as illustrated in \hyperref[fig:neo4j]{Figure \ref{fig:neo4j}}.
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.5\textwidth]{fig_neo4j}
-  \caption{\label{fig:neo4j}Topology data ingested in graph database}
-\end{figure}
-\clearpage
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=1\textwidth]{fig_erd}
-  \caption{\label{fig:erd}Synergy data ERD}
-\end{figure}
-\clearpage
-
-\noindent
-As described in the proposal document, the research work applies an iterative, agile model, in particular employing the concept of Behavior Driven Development (BDD) which aims to
+The research work applies an iterative, agile model, in particular employing the concept of Behavior Driven Development (BDD) which aims to
 identify and define system functionality from the lens of key stakeholders and defines functions and business logic as ``features'' which guide the development process \cite{9429593}.
 A system has one or more stakeholders, these are the actors outside of the system that interact with the application in question. Actors will have interests, goals or concerns in relation to that system, and may take the form of a person, outside system, subsystem or device to name a few. These actors will have various roles in regards to the operation of the system.
 
@@ -61,6 +34,138 @@ which guided the development tasks. The individual user stories for each actor c
   \end{tabular}
   \end{adjustbox}
 \end{table}
+
+As the underlying grid topologies support both the FLSIR algorithms and the simulation platform, extracting this information from the available data served as a starting point for development.
+The data in question is derived from a Geographical Information System (GIS) named Synergy, this system maps the distribution
+network through the use of geospatial data \cite{4662926} in addition to metadata related to each individual asset, whether this entity is a pole, transformer, feeder, switch, substation
+or other asset type. The properties contained within this metadata depend on the asset type, for example which nodes (poles) are connected, their phases (RST) which denote
+whether they are part of the three phase (MV) or single phase (LV) network, which poles are equipped with Load Break Fault Make (LBFM) or Recloser circuit breakers and which of these
+are denoted as ``Normally Open'' and therefore serve as the boundary between network lines.
+\\
+Prior to analysis of the data, the export from Synergy which takes the form of a ``MDB'' (Microsoft Access Database) file was converted and ingested into a Postgres database, from here
+it was possible to generate an Entity Relationship Diagram (ERD), presented in \hyperref[fig:erd]{Figure \ref{fig:erd}}, to obtain a clearer view of the assets included in the data and their
+associated properties. From the analysis of the ERD it is clear that their is a deeply coupled relationship between entities in this data, and one of the goals of the research is to represent this data in a
+novel format through leveraging the concept of Graph Databases, which focuses on the connections between data and affords a more ontological view \cite{8509057} of the relationship
+between entities. To achieve this aim, the Synergy data was ingested into a ``neo4j'' graph database in a containerised environment as illustrated in \hyperref[fig:neo4j]{Figure \ref{fig:neo4j}}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{fig_neo4j}
+  \caption{\label{fig:neo4j}Topology data ingested in graph database}
+\end{figure}
+\clearpage
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\textwidth]{fig_erd}
+  \caption{\label{fig:erd}Synergy data ERD}
+\end{figure}
+\clearpage
+
+
+\noindent The Synergy dataset contains tables which are either empty or contain information which does not provide any value when considering a FLISR implementation, and to this end the dataset was explored
+thoroughly to discern useful data considering relevant assets and to organise it in such a way that it could be efficiently loaded into the simulation platform and ingested by the FLISR algorithms.
+\\
+A key table identified ``InstSections'' forms the hub of the data schema and maps to a majority of other entities via the property ``SectionId''. In the context of the Synergy system individual poles are
+referred to as ``nodes'', and therefore the properties ``FromNodeId'' and ``ToNodeId'' are pivotal in determining how poles are connected to one another, additionally the property ``SectionPhases'' specifies whether
+the specific section is part of the MV or LV network, \hyperref[fig:inst_section]{Figure \ref{fig:inst_section}} details the full ``InstSection'' schema.
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{fig_inst_section_schema}
+  \caption{\label{fig:inst_section}InstSection Schema}
+\end{figure}
+\clearpage
+
+\noindent Geolocation data for individual nodes is contained within the ``Nodes'' table, in both Cartesian (X \& Y) and Geographic (latitude \& longitude) coordinate formats as shown in \hyperref[fig:node_schema]{Figure \ref{fig:node_schema}}, however it was noted that the latitude and longitude properties had
+been populated with the X \& Y coordinates, and while there is a level of support for Cartesian coordinates within many software tools and packages for mapping objects, the vast majority utilise geographic
+coordinates as standard \cite{alim2018development}. To mitigate this factor, the X \& Y coordinates were converted to their corresponding latitude \& longitude coordinates as part of the conversion process from the original MDB
+database format to Neo4j.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{fig_node_schema}
+  \caption{\label{fig:node_schema}Node Schema}
+\end{figure}
+
+\noindent Nodes with LBFM circuit breakers and other asset types equipped which fall into this bracket are contained within the ``InstSwitches'', which contains a number of properties as illustrated in \hyperref[fig:switch_schema]{Figure \ref{fig:switch_schema}},
+most notably ``SectionId'' and ``UniqueDeviceId'' for linking to the ``InstSection'' and ``Node'' entities, in addition to ``SwitchType'' where LBFM circuit breakers are denoted as ``Soules'' and ``SwitchIsOpen'' which specifies whether the asset is configured to be a normally open
+point.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{fig_switch_schema}
+  \caption{\label{fig:switch_schema}InstSwitches Schema}
+\end{figure}
+
+\noindent While Reclosers are denoted as circuit breakers, within the Synergy dataset information regarding these assets is assigned its own entity named ``InstReclosers'' with a number of properties associated as described in \hyperref[fig:recloser_schema]{Figure \ref{fig:recloser_schema}}.
+Similar to the previous entity, the ``InstReclosers'' table contains the ``SectionId'' and ``UniqueDeviceId'' properties. Where it differs is the inclusion of ``Manufacturer'' and ``Model'', in this specific instance, the asset of interest are denoted as ``Nu-Lec'' model ``N Series'', in
+addition, those Recloser circuit breakers configured as normally open are specified by the ``RecloserIsOpen'' property.
+\clearpage
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{fig_recloser_schema}
+  \caption{\label{fig:recloser_schema}InstReclosers Schema}
+\end{figure}
+
+\noindent A key requirement of the simulation platform is to provide useful metrics based on the outputs of the FLISR algorithms related to CML and affected customers. As the
+Synergy data is completely anonymised, it does not contain fine-grained customer related data, therefore it was necessary to derive some approximation of the amount of connected customers by identifying properties that may
+aid in determining this data point. From analysis of the Synergy output, a table was identified named ``Loads'', described in \hyperref[fig:loads_schema]{Figure \ref{fig:loads_schema}} which references connected customers on each phase and links to the ``InstSection'' table via the
+``SectionId'' property.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{fig_load_schema}
+  \caption{\label{fig:loads_schema}Loads Schema}
+\end{figure}
+
+\noindent By correlating and appending the ``Phase$<$N$>$Customers'' to each ``InstSection'' it was possible to see an approximation of the connected customers per section of network. The word ``approximation'' is important to note here
+however, as specific sections of network had a large number of connected customers while viewing these locations via satellite perspective showed a low number of buildings in the area, one possibility is that these may be industrial, farming or
+other large customers which are treated differently within the Synergy system. Accounting for these outliers, a total number of customers was added as a property to on pole circuit breaker assets in the data, to allow for the collection of customer and CML related metrics.
+\\
+Finally, while the Synergy data includes a unique identifier for each section, node, asset etc., outside of the context of the Synergy system, these identifiers have no meaning and appear to be randomly generated. For the Irish network,
+assets such as on pole circuit breakers, are identified with a unique SCADA identifier, LBFM switches are denoted with an ``S'' identifier e.g., S514, with Reclosers denoted with an ``R'' e.g., R341. From the related research many of these
+identifiers were available for the Waterford trial site network, for those not available for Kerry or Mullingar, realistic identifiers were assigned following the same format. Likewise, assets that communicate with the DSO SCADA system are given an
+additional identifier which maps to their SCADA identification, named an ASDU (Application Service Data Unit), again a number of these were available for assets from previous research, those unavailable were given realistic values.
+\\
+The relevant properties ascertained from the entities included in the Synergy data, supplemented with the approximated customers and SCADA specific identifiers, formed the properties of each object in the graph database, an example is given below
+for the properties associated with an LBFM switch.
+
+\begin{lstlisting}
+{
+	"properties": {
+		"SubstationId": "KILCARRAGH_978",
+		"ToNodeId": "501685033",
+		"PhaseConductorId": "DUMMY",
+		"UniqueDeviceId": "501685032",
+		"Latitude": 52.234014486994,
+		"SectionPhases": "RST ",
+		"ConnectedCustomers": {
+			"low": 171,
+			"high": 0
+		},
+		"Longitude": -7.05518490362683,
+		"Name": "Knockboy",
+		"Asdu_ca": "24969",
+		"SwitchType": "Soule",
+		"ScadaId": "S507",
+		"IsToEndOpen": {
+			"low": 0,
+			"high": 0
+		},
+		"FeederId": "PASSAGHE E_978",
+		"NearNodeId": "501685033",
+		"NodeId": "100000615",
+		"FromNodeId": "100000615",
+		"SectionId": "501685032"
+	}
+}
+\end{lstlisting}
+
+\noindent All objects in the graph database adhere to the same pattern, whether it is a pole, LBFM switch, Recloser etc., though some of the properties may differ depending on the asset type, this level of consistency
+negated the need for complex queries and joins thereby enabling a streamlined approach in leveraging the data for use in both the simulation platform and FLISR algorithms.
 
 
 \import{parts/3_methods/3_1_experiment_setup/trial_grids/}{trial_grids.tex}

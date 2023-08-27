@@ -3,63 +3,131 @@
 
 The FLISR Edge simulation platform enables the simulation of fault events which will serve
 to both test and evaluate the FLISR algorithms in lieu of actual hardware, these simulation are based on the distribution grid topologies obtained from the Synergy GIS output
-described previously. The simulation platform leverages a micro service-like architecture, whereby services are loosely coupled, in addition these services are hosted within a
-containerised environment via ``Docker'', and utilise ``docker-compose'' to enable simple deployment on either local systems or to a remote host \cite{7436659}. \hyperref[fig:sim_arch]{Figure \ref{fig:sim_arch}}
-describes the architecture implemented for the simulation platform with a description of each service following.
-
+described previously and captured in a graph database format. The simulation platform leverages a micro service architecture, whereby services are loosely coupled, in addition these services are hosted within a
+containerised environment via ``Docker'', and utilise tools such ``Docker Compose'' and ``GNU Make'' to enable simple deployment on either local systems or to a remote host \cite{7436659}.
+\hyperref[fig:sim_arch]{Figure \ref{fig:sim_arch}} describes the architecture implemented for the simulation platform with a description of each service following.
+\\
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.5\textwidth]{fig_sim_arch}
-  \caption{\label{fig:sim_arch}FLISR simulation platform architecture}
+  \includegraphics[width=0.2\textwidth]{fig_network_sim_platform}
+  \caption{\label{fig:sim_arch}FLISR Edge simulation platform architecture}
 \end{figure}
 
+\clearpage
+
 \begin{itemize}
-  \item \textbf{Databases}
+  \item \textbf{FLISR Edge Sim DB}
+\end{itemize}
+
+
+\noindent The primary database for the simulation platform is hosted within a Docker container based on the ``neo4j:5-community'' image, this service hosts the modified Synergy
+data which is ingested via an import script leveraging the Neo4J ``Cypher'' query language, and is utilised both for network visualisation on the front-end UI and simulation
+purposes.
+
+\begin{itemize}
+  \item \textbf{FLISR Edge Sim Web}
 \end{itemize}
 
 \noindent
-Two database services are in place which serve varying needs of the simulation platform, the first hosts the grid topologies with a ``Neo4j'' instance for both visualisation and simulation
-purposes. The second database is intended to host the simulation results in a relational SQL format, which can then be served to the user via browser or exported to CSV for analysis.
+
+The core logic of the simulation platform is hosted within the ``FLISR Edge Sim Web'' service, based on the ``python:3.11'' Docker image, and serves a number of functions.
+These functions include exposing interfaces to grid topology data for visualisation on the front-end, which are returned in ``GeoJSON'' format. On deployment of the Sim Web service,
+grid topology data hosted in the graph database is parsed and an number of ``.json'' files are generated for grid features, such as single phase lines, three phase lines, on pole
+circuit breakers and substations, which are treated as ``features''. By utilising the GeoJSON format, the bulk of the heavy processing is front-loaded on deployment
+ as the front-end simply processes the JSON files returned by the web service, in addition, the GeoJSON format provides for additional properties to be appended to features, which can
+ be used to reference specific assets when simulations are run. An example GeoJSON feature for a switch asset is given below.
+
+\begin{lstlisting}
+{
+	"type": "Feature",
+	"geometry": {
+		"type": "Point",
+		"coordinates": [52.1755714638251, -7.03211166714884]
+	},
+	"properties": {
+		"sectionId": "100006634",
+		"asdu_ca": "24972",
+		"scadaId": "S510",
+		"switchType": "LBFM",
+		"isToEndOpen": "False",
+		"name": "Gaultier Kilcarragh",
+		"connectedCustomers": "40",
+		"feederId": "GAUTIER_978"
+	}
+}
+\end{lstlisting}
+
+\noindent The Web Sim service also includes interfaces to interact with both the centralised and distributed FLISR algorithms for simulation purposes, explained in greater detail in \hyperref[sec:simulation_platform]{Section 3.2.1},
+and generating metrics based on the results of completed simulations, returning these results to the user and also capturing them in CSV format.
 
 \begin{itemize}
-  \item \textbf{Grid topology service}
+  \item \textbf{FLISR Edge Sim UI}
 \end{itemize}
 
-\noindent
-The grid topology service consists of a Python Flask server which provides an interface to request information relating to the grid topology, such as specific assets, asset data etc.,
-In addition, this service generates ``GeoJSON'' from the grid topology data which is used to visualise the trial site distribution grids.
-
-\begin{itemize}
-  \item \textbf{Simulation service}
-\end{itemize}
+\noindent Finally, the FLISR Edge Sim UI service provides the front-end visualisation of the distribution grids to the user via browser. This service is based on the ``node:19'' Docker image and makes use
+of the ``React'' framework to implement front-end features. Network lines and assets are visualised via the GeoJSON generated by the FLISR Edge Sim Web service
+and leveraging the ``Leaflet'' JavaScript Library in combination with ``OpenStreetMaps'' through their public tile server. Leaflet is a lightweight, open-source library designed with performance in mind, and given the size of the distribution grids and the amount of lines to be drawn, made
+it a suitable choice for implementation. Within the Leaflet framework, maps and entities drawn within are treated as separate objects with properties, allowing for these objects to be referenced as needed giving the scope
+and flexibility to introduce intuitive actions and responses based on user input \cite{crickard2014leaflet}.
 
 \noindent
-The simulation service serves as the largest and most complex, which also consists of a Python Flask server. Unlike the grid topology service, the simulation service queries for specific
-data and contains functionality in order to run fault simulations and provide and outward interface to pass data to visualise these simulations. This service also interacts directly with the
-FLISR Edge algorithms and simulates control on the edge devices. On completion of a simulation, the results are stored in the relational database.
-
-\begin{itemize}
-  \item \textbf{Reporting service}
-\end{itemize}
-
-\noindent
-The reporting service again consists of a Python Flask server and REST interface. The key purpose of this service is to query, parse and process simulation result data stored in the Postgres database,
-for visualisation to the user and for analysis purposes by exporting to CSV format.
-
-\begin{itemize}
-  \item \textbf{Visualisation service}
-\end{itemize}
-
-\noindent
-Finally, the visualisation service consists of a React front-end which serves a graphical user interface to the user where the distribution grids and simulations are visualised. The UI contains
-controls to set up and run simulations, view the simulation process, simulation results and the option to export these results for analysis. ``GeoJSON'' and ``LeaftletJS'' are leveraged to parse geolcation data,
-via ``OpenStreetMap''.
 
 % subsubsection trial_grids (end)
 
 \subsubsection{Trial site features}
 \label{sec:trial_features}
 
-Describe the trial site distribution grids, number of switches, make up etc., include screenshots from sim platform currently.
+\noindent The distribution grids investigated throughout the research activities and development of the FLISR Edge simulation platform and algorithms, are dispersed throughout Ireland, located in Co. Waterford, Co. Kerry and Co. Mullingar.
+Of the three, the distribution grid located in Co. Waterford is by far the most complex, consisting of a complex mesh network covering the outskirts of Waterford City, following the coastline towards Passage East, Dunmore East and Tramore,
+also covering the area of countryside between, as presented in \hyperref[fig:waterford_site]{Figure \ref{fig:waterford_site}}. This network is fed by three substations, located in Grange, Tramore and Kilcarragh with a total of eighteen on pole circuit breakers installed, consisting of fifteen LBFM switches and three Reclosers.
+Due to the large area of the site, there are a large number of customers spread throughout, with the highest density occurring within the vicinity of Passage East and Dunmore East as to be expected. Taking into account the sites complexity
+and proximity to the coastline, there is a higher likelihood of fault events due to inclement weather and as such would be suitable candidate for testing a FLISR solution in the field.
+\clearpage
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.55\textwidth]{fig_waterford_circuitry}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.45\textwidth]{fig_waterford_site}
+  \caption{\label{fig:waterford_site}Waterford trial site circuitry and visualisation}
+\end{figure}
+
+\noindent Similar to Waterford, the distribution grid located in Kerry is situated by the coastline, however in comparison the grid is far less complex, fed at both ends by a substation located in Kenmare and Cahersiveen, with a total of eight
+Recloser switches, the circuitry and visualisation of this network is illustrated in \hyperref[fig:kerry_site]{Figure \ref{fig:kerry_site}}. Due to the structure of this network, the opportunities for back feeding in the event of a fault is limited, with its remote nature it is likely that
+network connectivity may be limited, particularly in higher areas and mountainous valleys, making it a suitable use case for installation of edge devices to provide distributed FLISR functionality.
+\\
+Furthermore, as the site is configured with Reclosers for each on pole circuit breaker there is likely a loop automation system in place which provides FLISR-like functionality. For a physical trial, a testing criteria for the FLISR Edge solution would be a comparison for any
+existing loop automation in place on the network in this area in terms of speed of operation and steps taken by each solution.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{fig_kerry_circuitry}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{fig_kerry_site}
+  \caption{\label{fig:kerry_site}Kerry trial site circuitry and visualisation}
+\end{figure}
+
+\noindent Lastly, the distribution grid located in Mullingar shares similarities with the previous trial sites, having a somewhat radial structure and similar to the Kerry trial site, configured with Reclosing switches throughout.
+This network consists of two substations, one located outside of Mullingar town, with the other side of the network fed by a substation located near Clara village to the South with one LBFM and seven Recloser switches installed,
+\hyperref[fig:mullingar_site]{Figure \ref{fig:mullingar_site}} presents the circuitry and visualisation of the site.
+Two of the Reclosers are located at the boundary of the network and serve as normally open points, providing opportunities for back feeding energy supply from adjoining networks. Its location in the midlands likely leads to relatively strong
+network coverage and a number of fault events that are more representative of the country at large and therefore would serve as an ideal location to test the operation of a FLISR solution in a less unpredictable network.
+\clearpage
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{fig_mullingar_circuitry}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{fig_mullingar_site}
+  \caption{\label{fig:mullingar_site}Mullingar trial site circuitry and visualisation}
+\end{figure}
 
 % subsubsection trial_features(end)
