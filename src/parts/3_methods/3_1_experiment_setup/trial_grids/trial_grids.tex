@@ -6,14 +6,12 @@ to both test and evaluate the FLISR algorithms in lieu of actual hardware, these
 described previously and captured in a graph database format. The simulation platform leverages a micro service architecture, whereby services are loosely coupled, in addition these services are hosted within a
 containerised environment via ``Docker'', and utilise tools such ``Docker Compose'' and ``GNU Make'' to enable simple deployment on either local systems or to a remote host \cite{7436659}.
 \hyperref[fig:sim_arch]{Figure \ref{fig:sim_arch}} describes the architecture implemented for the simulation platform with a description of each service following.
-\\
+\clearpage
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.2\textwidth]{fig_network_sim_platform}
   \caption{\label{fig:sim_arch}FLISR Edge simulation platform architecture}
 \end{figure}
-
-\clearpage
 
 \begin{itemize}
   \item \textbf{FLISR Edge Sim DB}
@@ -28,16 +26,14 @@ purposes.
   \item \textbf{FLISR Edge Sim Web}
 \end{itemize}
 
-\noindent
-
-The core logic of the simulation platform is hosted within the ``FLISR Edge Sim Web'' service, based on the ``python:3.11'' Docker image, and serves a number of functions.
+\noindent The core logic of the simulation platform is hosted within the ``FLISR Edge Sim Web'' service, based on the ``python:3.11'' Docker image, and serves a number of functions.
 These functions include exposing interfaces to grid topology data for visualisation on the front-end, which are returned in ``GeoJSON'' format. On deployment of the Sim Web service,
 grid topology data hosted in the graph database is parsed and an number of ``.json'' files are generated for grid features, such as single phase lines, three phase lines, on pole
 circuit breakers and substations, which are treated as ``features''. By utilising the GeoJSON format, the bulk of the heavy processing is front-loaded on deployment
  as the front-end simply processes the JSON files returned by the web service, in addition, the GeoJSON format provides for additional properties to be appended to features, which can
  be used to reference specific assets when simulations are run. An example GeoJSON feature for a switch asset is given below.
-
-\begin{lstlisting}
+\clearpage
+\begin{lstlisting}[language=json]
 {
 	"type": "Feature",
 	"geometry": {
