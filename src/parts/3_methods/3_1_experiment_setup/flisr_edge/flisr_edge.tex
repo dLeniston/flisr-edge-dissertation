@@ -40,6 +40,7 @@ the edge device will instead leverage the local FLISR algorithm and pass the gen
 \noindent The key properties in this data are, ``ASDU\_CA'' which is the identifier used by the DSO SCADA system to link the switch to its SCADA identifier, ``IOA'' (Information Object Address) which defines the specific input/output
 referenced on the switch, for example, the status of the power supply, and finally ``Value'' which is given as a string value, ``0(OFF)'' mapping to ``False'', with a value of ``1(ON)'' mapping to ``True''.
 While LBFM and Recloser switches both follow this convention, the IOAs which map to FLISR specific outputs are distinct as per manufacturer specifications.
+\\
 As stated in \hyperref[sec:flisr]{Section 2.2} a faulted switch will pass an FPI and LVI status message, whereas a switch which has simply lost power, but not faulted, will pass an LVI status.
 An FPI on it's own, would not necessarily indicate a fault, for example, a tree branch intermittently knocking against a wire on a gusty day, may result in a FPI status each occurrence,
 but would not affect supply and be considered a ``Transient'' fault. As a general rule, any switch which gives an FPI and LVI signal, due to physical damage, should be opened, and therefore the damaged line or lines are no longer ``live''.
@@ -89,7 +90,7 @@ The FPI and LVI message format for both a LBFM and Recloser switch are given bel
   {"LinkAdd": 1,"ASDU_CA": 23089,"TypeID": 30,"IOA": 4096,"Value": "1(ON)"}
 \end{lstlisting}
 
-In operation then, both FLISR algorithms are designed to capture these switch status messages, and based on what is received (FPI and/or LVI) and the topology data related to that pole,
+\noindent In operation then, both FLISR algorithms are designed to capture these switch status messages, and based on what is received (FPI and/or LVI) and the topology data related to that pole,
 whether it is a LBFM/Recloser switch and/or a normally open point, determine the appropriate control message to return for a particular on pole circuit breaker. Similar to the simulation platform
 services, both the centralised and distributed FLISR algorithms are implemented as lightweight containerised services, and are based on the ``golang:1.20-alpine'' Docker image. Both algorithms are implemented in
 the Go language, due to its suitability for a microservice, containerised environment, performance and efficiency. A study by Dymora et al., remarked that for processing small amounts of data,
