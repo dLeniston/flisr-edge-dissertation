@@ -47,10 +47,10 @@ it was possible to generate an Entity Relationship Diagram (ERD), presented in \
 associated properties. From the analysis of the ERD it is clear that their is a deeply coupled relationship between entities in this data, and one of the goals of the research is to represent this data in a
 novel format through leveraging the concept of Graph Databases, which focuses on the connections between data and affords a more ontological view \cite{8509057} of the relationship
 between entities. To achieve this aim, the Synergy data was ingested into a ``neo4j'' graph database in a containerised environment as illustrated in \hyperref[fig:neo4j]{Figure \ref{fig:neo4j}}.
-
+\\
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.5\textwidth]{fig_neo4j}
+  \includegraphics[width=0.8\textwidth]{fig_neo4j}
   \caption{\label{fig:neo4j}Topology data ingested in graph database}
 \end{figure}
 \clearpage
@@ -135,34 +135,34 @@ for the properties associated with an LBFM switch.
 \clearpage
 
 \begin{lstlisting}[language=json]
-{
-	"properties": {
-		"SubstationId": "KILCARRAGH_978",
-		"ToNodeId": "501685033",
-		"PhaseConductorId": "DUMMY",
-		"UniqueDeviceId": "501685032",
-		"Latitude": 52.234014486994,
-		"SectionPhases": "RST ",
-		"ConnectedCustomers": {
-			"low": 171,
-			"high": 0
-		},
-		"Longitude": -7.05518490362683,
-		"Name": "Knockboy",
-		"Asdu_ca": "24969",
-		"SwitchType": "Soule",
-		"ScadaId": "S507",
-		"IsToEndOpen": {
-			"low": 0,
-			"high": 0
-		},
-		"FeederId": "PASSAGHE E_978",
-		"NearNodeId": "501685033",
-		"NodeId": "100000615",
-		"FromNodeId": "100000615",
-		"SectionId": "501685032"
-	}
-}
+    {
+    	"properties": {
+    		"SubstationId": "KILCARRAGH_978",
+    		"ToNodeId": "501685033",
+    		"PhaseConductorId": "DUMMY",
+    		"UniqueDeviceId": "501685032",
+    		"Latitude": 52.234014486994,
+    		"SectionPhases": "RST ",
+    		"ConnectedCustomers": {
+    			"low": 171,
+    			"high": 0
+    		},
+    		"Longitude": -7.05518490362683,
+    		"Name": "Knockboy",
+    		"Asdu_ca": "24969",
+    		"SwitchType": "Soule",
+    		"ScadaId": "S507",
+    		"IsToEndOpen": {
+    			"low": 0,
+    			"high": 0
+    		},
+    		"FeederId": "PASSAGHE E_978",
+    		"NearNodeId": "501685033",
+    		"NodeId": "100000615",
+    		"FromNodeId": "100000615",
+    		"SectionId": "501685032"
+    	}
+    }
 \end{lstlisting}
 
 \noindent All objects in the graph database adhere to the same pattern, whether it is a pole, LBFM switch, Recloser etc., though some of the properties may differ depending on the asset type, this level of consistency
