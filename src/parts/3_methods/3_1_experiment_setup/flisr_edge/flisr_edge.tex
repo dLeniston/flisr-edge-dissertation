@@ -94,7 +94,7 @@ The FPI and LVI message format for both a LBFM and Recloser switch are given bel
 
 \noindent In operation then, both FLISR algorithms are designed to capture these switch status messages, and based on what is received (FPI and/or LVI) and the topology data related to that pole,
 whether it is a LBFM/Recloser switch and/or a normally open point, determine the appropriate control message to return for a particular on pole circuit breaker. Similar to the simulation platform
-services, both the centralised and distributed FLISR algorithms are implemented as lightweight containerised services, and are based on the ``golang:1.20-alpine'' Docker image. Both algorithms are implemented in
+services, both the centralised and distributed FLISR algorithms are implemented as lightweight containerised services, and are built on the ``golang:1.20-alpine'' Docker image. Both algorithms are implemented in
 the Go language, due to its suitability for a microservice, containerised environment, performance and efficiency. A study by Dymora et al., remarked that for processing small amounts of data,
 Go surpassed comparable languages in terms of performance, CPU and memory utilisation \cite{app10238521}, making it an ideal candidate for implementation of the FLISR algorithms where reaction speed is paramount.
 \\
