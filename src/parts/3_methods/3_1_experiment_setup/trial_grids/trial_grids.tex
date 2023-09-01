@@ -70,11 +70,16 @@ and flexibility to introduce intuitive actions and responses based on user input
 
 % subsubsection trial_grids (end)
 
-\subsubsection{Trial site features}
+\subsubsection{Overview of trial site topologies}
 \label{sec:trial_features}
 
-\noindent The distribution grids investigated throughout the research activities and development of the FLISR Edge simulation platform and algorithms, are dispersed throughout Ireland, located in Co. Waterford, Co. Kerry and Co. Mullingar.
-Of the three, the distribution grid located in Co. Waterford is by far the most complex, consisting of a complex mesh network covering the outskirts of Waterford City, following the coastline towards Passage East, Dunmore East and Tramore,
+\noindent The distribution grids investigated throughout the research activities and development of the FLISR Edge simulation platform and algorithms, are dispersed throughout Ireland, located in County Waterford, County Kerry and County Mullingar and this section will describe these
+trial sites in terms of their structure, how their distinct lines are connected and the assets available with circuit breaking equipment installed.
+
+\subsubsection{Waterford trial site topology}
+\label{sec:waterford_trial}
+
+Of the three, the distribution grid located in Waterford is by far the most complex, consisting of a complex mesh network covering the outskirts of Waterford City, following the coastline towards Passage East, Dunmore East and Tramore,
 also covering the area of countryside between, as presented in \hyperref[fig:waterford_site]{Figure \ref{fig:waterford_site}}. This network is fed by three substations, located in Grange, Tramore and Kilcarragh with a total of eighteen on pole circuit breakers installed, consisting of fifteen LBFM switches and three Reclosers.
 Due to the large area of the site, there are a large number of customers spread throughout, with the highest density occurring within the vicinity of Passage East and Dunmore East as to be expected. Taking into account the sites complexity
 and proximity to the coastline, there is a higher likelihood of fault events due to inclement weather and as such would be suitable candidate for testing a FLISR solution in the field.
@@ -91,11 +96,16 @@ and proximity to the coastline, there is a higher likelihood of fault events due
   \caption{\label{fig:waterford_site}Waterford trial site circuitry and visualisation}
 \end{figure}
 
+% subsubsection waterford_trial(end)
+
+\subsubsection{Kerry trial site topology}
+\label{sec:kerry_trial}
+
 \noindent Similar to Waterford, the distribution grid located in Kerry is situated by the coastline, however in comparison the grid is far less complex, fed at both ends by a substation located in Kenmare and Cahersiveen, with a total of eight
 Recloser switches, the circuitry and visualisation of this network is illustrated in \hyperref[fig:kerry_site]{Figure \ref{fig:kerry_site}}. Due to the structure of this network, the opportunities for back feeding in the event of a fault is limited, with its remote nature it is likely that
 network connectivity may be limited, particularly in higher areas and mountainous valleys, making it a suitable use case for installation of edge devices to provide distributed FLISR functionality.
 \\
-Furthermore, as the site is configured with Reclosers for each on pole circuit breaker there is likely a loop automation system in place which provides FLISR-like functionality. For a physical trial, a testing criteria for the FLISR Edge solution would be a comparison for any
+Furthermore, as the site is configured with Reclosers in tandem, there is likely a loop automation system in place which provides FLISR-like functionality. For a physical trial, a testing criteria for the FLISR Edge solution would be a comparison for any
 existing loop automation in place on the network in this area in terms of speed of operation and steps taken by each solution.
 
 \begin{figure}[h]
@@ -108,6 +118,11 @@ existing loop automation in place on the network in this area in terms of speed 
   \includegraphics[width=0.7\textwidth]{fig_kerry_site}
   \caption{\label{fig:kerry_site}Kerry trial site circuitry and visualisation}
 \end{figure}
+
+% subsubsection kerry_trial(end)
+
+\subsubsection{Mullingar trial site topology}
+\label{sec:mullingar_trial}
 
 \noindent Lastly, the distribution grid located in Mullingar shares similarities with the previous trial sites, having a somewhat radial structure and similar to the Kerry trial site, configured with Reclosing switches throughout.
 This network consists of two substations, one located outside of Mullingar town, with the other side of the network fed by a substation located near Clara village to the South with one LBFM and seven Recloser switches installed,
@@ -125,5 +140,7 @@ network coverage and a number of fault events that are more representative of th
   \includegraphics[width=0.5\textwidth]{fig_mullingar_site}
   \caption{\label{fig:mullingar_site}Mullingar trial site circuitry and visualisation}
 \end{figure}
+
+% subsubsection mullingar_trial(end)
 
 % subsubsection trial_features(end)

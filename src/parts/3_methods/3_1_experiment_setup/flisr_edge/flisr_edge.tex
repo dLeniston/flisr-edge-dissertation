@@ -2,12 +2,14 @@
 \label{sec:flisr_edge}
 
 \noindent As described previously, the FLISR Edge solution proposed consists of two applications of the FLISR concept, one of which is a centralised implementation deployed in a remote location, such
-as the DSOs own systems, with the second deployed on assets with LBFM or Recloser switches installed via Edge device which can act independently if necessary.
+as the DSOs own systems, with the second deployed on LBFM and Recloser assets by equipping them with an additional Edge device, running the distributed algorithm, which can act independently if necessary.
 Such an Edge device would require compatible interfaces to link with existing equipment on the pole, sufficient processing capability to run Dockerised applications and finally cellular connectivity to
 send and receive data and control signals. With the rising popularity of low-cost and Edge computing, coupled with the growing rate of processing available to even low-power chips, the options available
 to provision a low-cost Edge computing device is much higher than in the previous decade \cite{8016573}. For example, ``Raspberry Pi'' provide a range of hardware configurations
-for low-cost computing aimed at both domestic and industry, including a wide array of additional modules available to meet a variety of use cases. A review of available retailers suggests that
-on average acquiring a low-cost computing device with the appropriate processing capacity (e.g., Raspberry Pi 3 Model B+) and required modules would cost approximately one hundred euros per device.
+for low-cost computing, including a wide array of additional modules available to meet a variety of use cases. A review of available retailers suggests that
+on average acquiring a low-cost computing device with the appropriate processing capacity (e.g., Raspberry Pi 3 Model B+) and required modules would cost approximately one hundred euros per device minus installation costs.
+When considering a network such as Waterford, the cost of retrofitting existing LBFM switches with Reclosers to enable loop automation, costs 61,900 euros per unit according to ESB Networks 2023 standard prices report \cite{Networks_2023}.
+In comparison then, exploring the application of low-cost Edge computing devices to enable loop automation on existing assets appears more financially feasible.
 \\
 Assets equipped with switching hardware consist of a number of modules which allow for interfacing with the DSOs SCADA system for interpreting, sending and receiving data and enacting control operations
 on the physical circuit breaker. At the core of this architecture is a Remote Terminal Unit (RTU), a microprocessor based device, which streams real-time status data to and from the connected circuit breaker
