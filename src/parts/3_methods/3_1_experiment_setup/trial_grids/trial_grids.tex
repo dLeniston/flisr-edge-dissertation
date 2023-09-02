@@ -3,7 +3,7 @@
 
 The FLISR Edge simulation platform enables the simulation of fault events which will serve
 to both test and evaluate the FLISR algorithms in lieu of actual hardware, these simulation are based on the distribution grid topologies obtained from the Synergy GIS output
-described previously and captured in a graph database format. The simulation platform leverages a micro service architecture, whereby services are loosely coupled, in addition these services are hosted within a
+described previously and captured in a graph database format. The simulation platform leverages a microservice architecture, whereby services are loosely coupled, in addition these services are hosted within a
 containerised environment via ``Docker'', and utilise tools such ``Docker Compose'' and ``GNU Make'' to enable simple deployment on either local systems or to a remote host \cite{7436659}.
 \hyperref[fig:sim_arch]{Figure \ref{fig:sim_arch}} describes the architecture implemented for the simulation platform with a description of each service following.
 \clearpage
@@ -28,7 +28,7 @@ purposes.
 
 \noindent The core logic of the simulation platform is hosted within the ``FLISR Edge Sim Web'' service, built on the ``python:3.11'' Docker image, and serves a number of functions.
 These functions include exposing interfaces to grid topology data for visualisation on the front-end, which are returned in ``GeoJSON'' format. On deployment of the Sim Web service,
-grid topology data hosted in the graph database is parsed and an number of ``.json'' files are generated for grid features, such as single phase lines, three phase lines, on pole
+grid topology data hosted in the graph database is parsed and a number of ``.json'' files are generated for grid features, such as single phase lines, three phase lines, on pole
 circuit breakers and substations, which are treated as ``features''. By utilising the GeoJSON format, the bulk of the heavy processing is front-loaded on deployment
  as the front-end simply processes the JSON files returned by the web service, in addition, the GeoJSON format provides for additional properties to be appended to features, which can
  be used to reference specific assets when simulations are run. An example GeoJSON feature for a switch asset is given below.
@@ -69,7 +69,7 @@ and flexibility to introduce intuitive actions and responses based on user input
 \noindent
 
 % subsubsection trial_grids (end)
-
+\clearpage
 \subsubsection{Overview of trial site topologies}
 \label{sec:trial_features}
 
@@ -79,7 +79,7 @@ trial sites in terms of their structure, how their distinct lines are connected 
 \subsubsection{Waterford trial site topology}
 \label{sec:waterford_trial}
 
-Of the three, the distribution grid located in Waterford is by far the most complex, consisting of a complex mesh network covering the outskirts of Waterford City, following the coastline towards Passage East, Dunmore East and Tramore,
+Of the three trial sites, the distribution grid located in Waterford is by far the most complex, consisting of an intricate mesh network covering the outskirts of Waterford City, following the coastline towards Passage East, Dunmore East and Tramore,
 also covering the area of countryside between, as presented in \hyperref[fig:waterford_site]{Figure \ref{fig:waterford_site}}. This network is fed by three substations, located in Grange, Tramore and Kilcarragh with a total of eighteen on pole circuit breakers installed, consisting of fifteen LBFM switches and three Reclosers.
 Due to the large area of the site, there are a large number of customers spread throughout, with the highest density occurring within the vicinity of Passage East and Dunmore East as to be expected. Taking into account the sites complexity
 and proximity to the coastline, there is a higher likelihood of fault events due to inclement weather and as such would be suitable candidate for testing a FLISR solution in the field.
@@ -87,7 +87,7 @@ and proximity to the coastline, there is a higher likelihood of fault events due
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.55\textwidth]{fig_waterford_circuitry}
+  \includegraphics[width=0.57\textwidth]{fig_waterford_circuitry}
 \end{figure}
 
 \begin{figure}[h]
@@ -102,8 +102,8 @@ and proximity to the coastline, there is a higher likelihood of fault events due
 \label{sec:kerry_trial}
 
 \noindent Similar to Waterford, the distribution grid located in Kerry is situated by the coastline, however in comparison the grid is far less complex, fed at both ends by a substation located in Kenmare and Cahersiveen, with a total of eight
-Recloser switches, the circuitry and visualisation of this network is illustrated in \hyperref[fig:kerry_site]{Figure \ref{fig:kerry_site}}. Due to the structure of this network, the opportunities for back feeding in the event of a fault is limited, with its remote nature it is likely that
-network connectivity may be limited, particularly in higher areas and mountainous valleys, making it a suitable use case for installation of edge devices to provide distributed FLISR functionality.
+Recloser switches, the circuitry and visualisation of this network is illustrated in \hyperref[fig:kerry_site]{Figure \ref{fig:kerry_site}}. Due to the structure of this network, there is a narrow scope to back feed supply in the event of a fault, and with its remote nature it is likely that
+network connectivity is limited, particularly in higher areas and mountainous valleys, making it a suitable use case for installation of edge devices to provide distributed FLISR functionality.
 \\
 Furthermore, as the site is configured with Reclosers in tandem, there is likely a loop automation system in place which provides FLISR-like functionality. For a physical trial, a testing criteria for the FLISR Edge solution would be a comparison for any
 existing loop automation in place on the network in this area in terms of speed of operation and steps taken by each solution.

@@ -1,7 +1,7 @@
 \subsubsection{FLISR Edge network simulation platform \& algorithm operation}
 \label{sec:simulation_platform}
 
-A key component of the FLISR Edge solution is the network simulation test platform. As actual hardware is unavailable to test in the field, the simulation platform serves as a solution
+A key component of the FLISR Edge solution is the network simulation test platform. As actual hardware is unavailable to test in the field, the simulation platform serves as an apparatus
 for demonstrating, testing and validating the FLISR algorithm outputs, in addition to bridging the gap between the research and industry by providing an intuitive tool to DSO personnel.
 To ensure that the testing is as realistic as possible, the simulation platform implements interfaces to interact with the centralised and distributed FLISR algorithms that mimic those in
 the field. Furthermore, in order to evaluate the effects of network latency, the centralised algorithm and attached MQTT broker are deployed to a remote VM running within an OpenStack instance,
@@ -41,7 +41,7 @@ its own unique topic based on the assets ASDU indentifier, as presented in figur
 \end{figure}
 
 \noindent When running in distributed mode, the FLISR Edge sim web service passes the FPI and LVI messages to the local distributed
-FLISR algorithm via TCP web socket interface, as would be the case when deployed on the pole via edge device, in addition to the properties of the pole in the same format as returned from the graph database.
+FLISR algorithm via TCP web socket interface, as would be the case when deployed on the pole via an edge device, in addition to the properties of the pole in the same format as returned from the graph database.
 This interaction of the simulation platform with the FLISR algorithms is described in \hyperref[fig:sim_interaction]{Figure \ref{fig:sim_interaction}}
 \clearpage
 

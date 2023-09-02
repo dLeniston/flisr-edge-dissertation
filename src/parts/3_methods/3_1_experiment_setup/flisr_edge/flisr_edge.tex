@@ -2,8 +2,11 @@
 \label{sec:flisr_edge}
 
 \noindent As described previously, the FLISR Edge solution proposed consists of two applications of the FLISR concept, one of which is a centralised implementation deployed in a remote location, such
-as the DSOs own systems, with the second deployed on LBFM and Recloser assets by equipping them with an additional Edge device, running the distributed algorithm, which can act independently if necessary.
-Such an Edge device would require compatible interfaces to link with existing equipment on the pole, sufficient processing capability to run Dockerised applications and finally cellular connectivity to
+as the DSOs own systems, with the second deployed on LBFM and Recloser assets by equipping them with an additional edge device, running the distributed algorithm, which can act independently if necessary.
+This work expands on the previous related research by vastly expanding the capabilities of the FLISR algorithm by introducing bi-directional communication to directly control switching assets, in constrast
+to the somewhat limited previous iteration which simply generated an email forwarded to DSO personnel \cite{10.12688/openreseurope.14115.2}. In addition, FLISR Edge introduces the distributed element deployable on a low-cost edge device.
+\\
+Such an edge device would require compatible interfaces to link with existing equipment on the pole, sufficient processing capability to run Dockerised applications and finally cellular connectivity to
 send and receive data and control signals. With the rising popularity of low-cost and Edge computing, coupled with the growing rate of processing available to even low-power chips, the options available
 to provision a low-cost Edge computing device is much higher than in the previous decade \cite{8016573}. For example, ``Raspberry Pi'' provide a range of hardware configurations
 for low-cost computing, including a wide array of additional modules available to meet a variety of use cases. A review of available retailers suggests that
@@ -11,10 +14,11 @@ on average acquiring a low-cost computing device with the appropriate processing
 When considering a network such as Waterford, the cost of retrofitting existing LBFM switches with Reclosers to enable loop automation, costs 61,900 euros per unit according to ESB Networks 2023 standard prices report \cite{Networks_2023}.
 In comparison then, exploring the application of low-cost Edge computing devices to enable loop automation on existing assets appears more financially feasible.
 \\
+\\
 Assets equipped with switching hardware consist of a number of modules which allow for interfacing with the DSOs SCADA system for interpreting, sending and receiving data and enacting control operations
 on the physical circuit breaker. At the core of this architecture is a Remote Terminal Unit (RTU), a microprocessor based device, which streams real-time status data to and from the connected circuit breaker
 \cite{6032722}.
-Communication with the DSOs SCADA system conforms to the IEC  60870-5-101/104 protocol, which provides network access based on TCP/IP communications and enables basic control tasks between centralized
+Communication with the DSOs SCADA system conforms to the IEC  60870-5-101/104 protocol, which provides network access based on TCP/IP communications and enables basic control tasks between centralised
 control centers and connected assets, this is achieved by connecting the RTU to a IEC 101 master, which then connects to a IEC 104 server, facilitating communication via TCP/IP \cite{6672100}. It is this IEC 104
 modem which provides the network communications with the DSO SCADA system, as well as a number of interfaces to connect external devices, including serial and Ethernet connectivity.
 It is these physical ports that will enable connection with the edge device, allow for the capture and parsing of the switch status messages without interfering with the existing stream to the DSOs SCADA system.
@@ -43,7 +47,7 @@ the edge device will instead leverage the local FLISR algorithm and pass the gen
 referenced on the switch, for example, the status of the power supply, and finally ``Value'' which is given as a string value, ``0(OFF)'' mapping to ``False'', with a value of ``1(ON)'' mapping to ``True''.
 While LBFM and Recloser switches both follow this convention, the IOAs which map to FLISR specific outputs are distinct as per manufacturer specifications.
 \\
-As stated in \hyperref[sec:flisr]{Section 2.2} a faulted switch will pass an FPI and LVI status message, whereas a switch which has simply lost power, but not faulted, will pass an LVI status.
+As stated in \hyperref[sec:flisr]{Section 2.2} a switch situated on a damaged line will pass an FPI and LVI status message, whereas a switch which has simply lost power, but not faulted, will pass an LVI status.
 An FPI on it's own, would not necessarily indicate a fault, for example, a tree branch intermittently knocking against a wire on a gusty day, may result in a FPI status each occurrence,
 but would not affect supply and be considered a ``Transient'' fault. As a general rule, any switch which gives an FPI and LVI signal, due to physical damage, should be opened, and therefore the damaged line or lines are no longer ``live''.
 The FPI and LVI message format for both a LBFM and Recloser switch are given below in addition to the corresponding control message to open or close the circuit breaker.
