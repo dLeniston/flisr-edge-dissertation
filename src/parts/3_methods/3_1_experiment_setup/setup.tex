@@ -3,9 +3,8 @@
 
 The research work applies an iterative, agile model, in particular employing the concept of Behavior Driven Development (BDD) which aims to
 identify and define system functionality from the lens of key stakeholders and defines functions and business logic as ``features'' which guide the development process \cite{9429593}.
-A system has one or more stakeholders, these are the actors outside of the system that interact with the application in question. Actors will have interests, goals or concerns in relation to that system, and may take the form of a person, outside system, subsystem or device to name a few. These actors will have various roles in regards to the operation of the system.
-
-\noindent To define these actors, a list should be created with a basic format of:
+A system has one or more stakeholders, these are the actors outside of the system that interact with the application in question. Actors will have interests, goals or concerns in relation to that system, and may take the form of a person, outside system, subsystem or device to name a few.
+These actors will have various roles in regards to the operation of the system, goals which the system aims to fulfill and these are defined prior to development in line with the following format.
 
 \begin{itemize}
   \item \textbf{Actor Name:} A clear identifier for the actor.
@@ -15,6 +14,7 @@ A system has one or more stakeholders, these are the actors outside of the syste
 \end{itemize}
 
 \noindent
+
 It was necessary then to define users for both the simulation platform and the FLISR Edge algorithm itself, presented in \hyperref[table:1]{Table \ref{table:1}}, and these served as the initial starting point to then define user stories
 which guided the development tasks. The individual user stories for each actor can be found in \hyperref[sec:appendix_a]{Appendices A \& B}.
 
@@ -34,6 +34,12 @@ which guided the development tasks. The individual user stories for each actor c
   \end{tabular}
   \end{adjustbox}
 \end{table}
+
+\noindent The defined user stories can then be translated into a number of implementable system features, which are then broken down further into a array of development tasks. Within the context of FLISR Edge, GitHubs ``Projects'' space was leveraged to provide a task
+board which was populated with separate issue tickets which relate to a specific research, development or documentation task and a separate GitHub repository was provisioned for each entity of the FLISR Edge system. All features implemented are version controlled
+through separate branches, commits and were tested and verified before merging in order to avoid breaking changes and to keep the main branch clean, in addition, Wiki spaces were utilised to capture documentation and research items throughout development to be included
+in the final research document.
+
 
 % subsection setup (end)
 
