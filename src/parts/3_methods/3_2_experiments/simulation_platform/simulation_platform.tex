@@ -30,7 +30,7 @@ intuitively build a fault case to test as illustrated in \hyperref[fig:test_ui]{
 \end{figure}
 
 \noindent Once the user is ready to run the test case based on their configuration of faulted and downed assets, they may select to run the test in either centralised or distributed FLISR mode, depending on the
-option chosen, the FLISR Edge sim web service will create the corresponding FPI and LVI status messages in the JSON formats described in \hyperref[sec:flisr_edge]{Section 3.1.3} and pass them to the
+option chosen, the FLISR Edge sim web service will create the corresponding FPI and LVI status messages in the JSON formats described in \hyperref[sec:flisr_edge]{Section 3.2.10} and pass them to the
 relevant FLISR algorithm. In the case of the centralised FLISR algorithm, the generated FPI and LVI messages are passed via MQTT to the remote broker, each generated control message is passed back on
 its own unique topic based on the assets ASDU indentifier, as presented in figure \hyperref[fig:mqtt_sim]{Figure \ref{fig:mqtt_sim}}.
 
