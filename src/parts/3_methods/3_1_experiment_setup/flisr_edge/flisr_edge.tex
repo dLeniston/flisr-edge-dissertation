@@ -14,7 +14,6 @@ on average acquiring a low-cost computing device with the appropriate processing
 When considering a network such as Waterford, the cost of retrofitting existing LBFM switches with Reclosers to enable loop automation, costs 61,900 euros per unit according to ESB Networks 2023 standard prices report \cite{Networks_2023}.
 In comparison, exploring the application of low-cost Edge computing devices to enable loop automation on existing assets appears more financially feasible.
 \\
-\\
 Assets equipped with switching hardware consist of a number of modules which allow for interfacing with the DSOs SCADA system for interpreting, sending and receiving data and enacting control operations
 on the physical circuit breaker. At the core of this architecture is a Remote Terminal Unit (RTU), a microprocessor based device, which streams real-time status data to and from the connected circuit breaker
 \cite{6032722}.
@@ -22,7 +21,6 @@ Communication with the DSOs SCADA system conforms to the IEC  60870-5-101/104 pr
 control centers and connected assets, this is achieved by connecting the RTU to a IEC 101 master, which then connects to a IEC 104 server, facilitating communication via TCP/IP \cite{6672100}. It is this IEC 104
 modem which provides the network communications with the DSO SCADA system, as well as a number of interfaces to connect external devices, including serial and Ethernet connectivity.
 It is these physical ports that will enable connection with the edge device, allow for the capture and parsing of the switch status messages without interfering with the existing stream to the DSOs SCADA system.
-\\
 \\
 Within the context of the FLISR Edge algorithms operation, the edge device will act as a relay to the centralised FLSIR algorithm when network connectivity is available, by passing switch status messages
 to the centralised algorithm via MQTT (Message Queuing Telemetry Transport) a lightweight, publish/subscribe bi-directional communication protocol designed for resource constrained devices and/or remote locations \cite{7123563}.
