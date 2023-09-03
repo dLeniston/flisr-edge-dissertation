@@ -65,13 +65,13 @@ validation and verification, an example output of the CSV report is presented in
     \centering
     \caption{\label{table:2}Distributed FLISR algorithm sample results CSV}
     \begin{adjustbox}{width=\textwidth}
-    \begin{tabular}{|l|l|l|l|l|l|l|l|l|p{5cm}}
+    \begin{tabular}{|l|l|l|l|l|r|r|r|r|p{7cm}}
     \hline
-        start time & end time & faulted devices & down devices & operation & \parbox{2cm}{affected customers pre operation} & \parbox{2cm}{affected customers post operation} & \parbox{2cm}{cml per hour pre operation} & \parbox{2cm}{cml per hour post operation} \\ [0.1cm]
-        2023-08-25 08:11:37.300 & 2023-08-25 08:11:37.303 & ['S513'] & \parbox{3cm}{"['S512', 'S716', 'S514', 'S700']"} & \parbox{5cm}{"S513 opened, S512 closed, S716 closed, S514 N/O point closed, S700 N/O point closed, "} & 627 & 0 & 35739 & 0 \\ [0.5cm]
-        2023-08-29 14:31:58.414 & 2023-08-29 14:31:58.416 & ['R186'] & \parbox{3cm}{"['R185', 'R184']"} & \parbox{5cm}{"R186 opened, R185 closed, R184 N/O point closed, "} & 250 & 0 & 14250 & 0 \\ \hline
-        2023-08-29 14:35:55.852 & 2023-08-29 14:35:55.854 & "['S507', 'S508']" & \parbox{3cm}{"['R518', 'S509', 'S697']"} & \parbox{5cm}{"S507 opened, S508 opened, R518 closed, S509 closed, S697 N/O point closed, "} & 1370 & 171 & 78090 & 9747 \\ [0.5cm]
-        2023-08-29 14:36:35.252 & 2023-08-29 14:36:35.255 & "['R517', 'S513', 'S512']" & \parbox{3cm}{"['S716', 'S514', 'S700']"} & \parbox{5cm}{"R517 opened, S513 opened, S512 opened, S716 closed, S514 N/O point closed, S700 N/O point closed, "} & 784 & 278 & 44688 & 15846 \\ [0.5cm]
+        Start time & End time & Faulted devices & Down devices & Operation & \parbox{2cm}{Affected customers pre operation} & \parbox{2cm}{Affected customers post operation} & \parbox{2cm}{CML per hour pre operation} & \parbox{2cm}{CML per hour post operation} \\ [0.1cm]
+        2023-08-25 08:11:37.300 & 2023-08-25 08:11:37.303 & \parbox{2cm}{S513} & \parbox{2cm}{S512, S716, S514, S700} & \parbox{7cm}{S513 opened, S512 closed, S716 closed, S514 N/O point closed, S700 N/O point closed} & 627 & 0 & 35739 & 0 \\ [0.5cm]
+        2023-08-29 14:31:58.414 & 2023-08-29 14:31:58.416 & \parbox{2cm}{R186} & \parbox{2cm}{R185, R184} & \parbox{7cm}{R186 opened, R185 closed, R184 N/O point closed} & 250 & 0 & 14250 & 0 \\
+        2023-08-29 14:35:55.852 & 2023-08-29 14:35:55.854 & \parbox{2cm}{S507, S508} & \parbox{2cm}{R518, S509, S697} & \parbox{7cm}{S507 opened, S508 opened, R518 closed, S509 closed, S697 N/O point closed} & 1370 & 171 & 78090 & 9747 \\ [0.5cm]
+        2023-08-29 14:36:35.252 & 2023-08-29 14:36:35.255 & \parbox{2cm}{R517, S513, S512} & \parbox{2cm}{S716, S514, S700} & \parbox{7cm}{R517 opened, S513 opened, S512 opened, S716 closed, S514 N/O point closed, S700 N/O point closed} & 784 & 278 & 44688 & 15846 \\ [0.5cm]
     \hline
     \end{tabular}
     \end{adjustbox}
