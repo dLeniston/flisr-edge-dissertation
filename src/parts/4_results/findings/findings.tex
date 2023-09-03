@@ -1,7 +1,7 @@
 \subsection{Research findings}
 \label{sec:findings}
 
-The findings from the experiments described in \hyperref[sec:simulation_platform]{Section 3.2.1} are discussed in the context of the research objectives outlined and what
+The findings from the experiments described in \hyperref[sec:simulation_platform]{Section 3.2.1} are discussed in the context of the research objectives and what
 insights can be gleaned by framing the results of testing the FLISR Edge solution in terms of these objectives.
 
 \begin{itemize}
@@ -15,7 +15,8 @@ This observation supports the research literature where it is found that FLISR i
 \\
 In addition, it is important to note that FLISR is a fault mitigation solution, therefore in cases where a large number of faulted lines occur on a section of network, the results will be
 limited. For example, a specific test case simulated for the Waterford trial where one switch is set to faulted, results in 1370 affected customers and 78090 CML per hour prior to FLISR operation,
-post operation this is reduced to 171 customers affected and 9747 CML per hour. However, increasing the number of faulted switches to four for this same test case, results in an affected customer count of 844 after operation and a total of 48108 CML.
+post operation this is reduced to 171 customers affected and 9747 CML per hour. However, increasing the number of faulted switches to four for this same test case,
+results in an affected customer count of 844 after operation and a total of 48108 CML after FLISR operation.
 
 \begin{itemize}
   \item \textbf{R2 - Given a similar set of conditions, how will the results produced by the centralised FLISR algorithm compare to the distributed FLISR algorithms operating locally at the edge of the network?}
@@ -35,10 +36,10 @@ network bandwidth available on 5G networks, 4G LTE, 3G and 2G, with the average 
 \vspace{0.5cm}
   \caption{\label{table:3}Average centralised FLISR operational speed}
   \centering
-  \begin{tabular}{|l|l|}
+  \begin{tabular}{|l|r|}
   \hline
      \header  Network type & Average speed (ms)  \\
-     \row Domestic WiFi (5G analogue) & 212.8    \\
+     \row Domestic WiFi (5G analogue) & 212.8  \\
      \row 4G LTE & 260.4  \\
      \row 3G & 267.1  \\
      \row 2G & 1049.6 \\
